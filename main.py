@@ -4,6 +4,7 @@ import time
 # from opgg.summoner import Summoner
 
 account_list = {}
+path = ""
 
 
 def main():
@@ -37,7 +38,7 @@ def main():
 
 
 def load_accounts():
-    with open("C:\\Users\\tit\\Desktop\\New folder\\pytry\\list.txt") as f:
+    with open(path) as f:
         for linea in f:
             partes = linea.strip().split(':')
             if len(partes) == 3:
@@ -86,7 +87,7 @@ def add_account():
     otro = input("Enter password: ")
 
     # add to the file
-    with open("C:\\Users\\tit\\Desktop\\New folder\\pytry\\list.txt", "a") as f:
+    with open(path, "a") as f:
         f.write("\n")
         f.write(usuario + ":" + clave + ":" + otro + "\n")
         f.close()
@@ -102,10 +103,10 @@ def delete_account():
             print("\nSelected Account: " + account)
             print("Username: " + account_list[account]['username'] +
                   "\nPassword: " + account_list[account]['password'])
-            with open("C:\\Users\\tit\\Desktop\\New folder\\pytry\\list.txt", "r") as f:
+            with open(path, "r") as f:
                 lines = f.readlines()
                 f.close()
-            with open("C:\\Users\\tit\\Desktop\\New folder\\pytry\\list.txt", "w") as f:
+            with open(path, "w") as f:
                 for line in lines:
                     if line.strip("\n") != account + ":" + account_list[account]['username'] + ":" + account_list[account]['password']:
                         f.write(line)
