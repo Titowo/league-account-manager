@@ -10,6 +10,13 @@ League Account Manager is a simple console-based application that allows you to 
 - Delete accounts from the list.
 - Data is stored in a text file for persistence.
 
+## Releases
+
+### Latest Release
+
+- [Download Version 1.0.0](https://github.com/yourusername/league-account-manager/releases/tag/v1.0.0)
+- Initial release of the League Account Manager.
+
 ## Getting Started
 
 These instructions will help you get a copy of the project up and running on your local machine.
