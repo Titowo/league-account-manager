@@ -51,13 +51,8 @@ python league_account_manager.py
 
 3. Follow the on-screen instructions to perform the desired action (e.g., selecting an account to copy the username to the clipboard).
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
-- Thanks to [pyperclip](https://pypi.org/project/pyperclip/) for clipboard support.
+- Thanks to [pyperclip](https://pypi.org/project/pyperclip/)
 - This application is meant for educational and personal use.
 
-Feel free to customize this `README.md` with more information, screenshots, or any additional details that you find relevant to your League Account Manager application.
