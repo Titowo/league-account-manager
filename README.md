@@ -39,7 +39,13 @@ git clone https://github.com/Titowo/league-account-manager.git
 cd league-account-manager
 ```
 
-3. Run the application:
+3. Run pip:
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Run the application:
 
 ```bash
 python main.py
