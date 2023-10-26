@@ -23,7 +23,7 @@ You need to have Python 3 installed on your machine. If you don't have it, you c
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/league-account-manager.git
+git clone https://github.com/Titowo/LeagueAccountManager.git
 ```
 
 2. Change the directory to the project folder:
