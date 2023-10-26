@@ -1,4 +1,4 @@
-# League Account Manager
+# 📟League Account Manager
 
 League Account Manager is a simple console-based application that allows you to manage your League of Legends accounts. You can add, delete, and select accounts to quickly copy account information to the clipboard.
 
