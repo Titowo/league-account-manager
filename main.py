@@ -1,15 +1,19 @@
 import os
 import time
-# from opgg.opgg import OPGG
-# from opgg.summoner import Summoner
+import pyperclip
 
 account_list = {}
-path = ""
+PATH = ""
 
+class Account:
+    def __init__(self, ingame_name, username, password):
+        self.ingame_name = ingame_name
+        self.username = username
+        self.password = password
 
 def main():
     load_accounts()
-    print("------Welcome to Leauge Acoount Manager------")
+    print("------Welcome to League Account Manager------")
     print("1) Print Account List")
     print("2) Select Account")
     print("3) Add Account to the List")
@@ -32,40 +36,33 @@ def main():
         print("Invalid choice")
         main()
 
-    # for i in account_list:
-    #     print(i)
-    #     print(account_list[i])
-
-
 def load_accounts():
-    with open(path) as f:
+    with open(PATH) as f:
         for linea in f:
             partes = linea.strip().split(':')
             if len(partes) == 3:
                 usuario, clave, otro = partes
-                account_list[usuario] = {'username': clave, 'password': otro}
+                account_list[usuario] = Account(usuario, clave, otro)
     f.close()
-
 
 def print_account_list(i):
     if i == 1:
-        print("\n\nAccount List: ")
+        print("\nAccount List:")
         count = 1
         for account in account_list:
-            print(str(count) + ") " + account)
+            print(f"{count}) {account_list[account].ingame_name}")
             count += 1
     elif i == 2:
-        os.system('cls')
-        print("\n\nAccount List: ")
+        os.system('cls' if os.name == 'nt' else 'clear')  # Clear screen (Windows or Unix)
+        print("\nAccount List:")
         count = 1
         for account in account_list:
-            print(str(count) + ") " + account)
+            print(f"{count}) Ingame Name: {account_list[account].ingame_name}, Username: {account_list[account].username}")
             count += 1
         print("Esperando...")
         time.sleep(3)
-        os.system('cls')
+        os.system('cls' if os.name == 'nt' else 'clear')  # Clear screen (Windows or Unix)
         main()
-
 
 def select_account():
     print_account_list(1)
@@ -73,51 +70,54 @@ def select_account():
     count = 1
     for account in account_list:
         if count == opt:
-            print("\nSelected Account: " + account)
-            print("Username: " + account_list[account]['username'] +
-                  "\nPassword: " + account_list[account]['password'])
-            return account
-        count += 1
+            print("\nSelected Account: " + account_list[account].ingame_name)
+            pyperclip.copy(account_list[account].username)
+            print(f"Username: {account_list[account].username}\nPassword: {account_list[account].password}")
+            print("\nUsername copied to clipboard!")
+            input("\nPress enter to continue...")
 
+        count += 1
 
 def add_account():
     print("Add Account")
-    usuario = input("Enter ingame name: ")
-    clave = input("Enter username: ")
-    otro = input("Enter password: ")
+    ingame_name = input("Enter ingame name: ")
+    username = input("Enter username: ")
+    password = input("Enter password: ")
 
-    # add to the file
-    with open(path, "a") as f:
-        f.write("\n")
-        f.write(usuario + ":" + clave + ":" + otro + "\n")
-        f.close()
+    new_account = Account(ingame_name, username, password)
+    account_list[ingame_name] = new_account
 
-
+    with open(PATH, "a") as f:
+        f.write(f"\n{ingame_name}:{username}:{password}\n")
+    
 def delete_account():
     print_account_list(1)
     print("Delete Account")
     opt = int(input("Enter your choice: "))
     count = 1
+    to_delete = None
     for account in account_list:
         if count == opt:
-            print("\nSelected Account: " + account)
-            print("Username: " + account_list[account]['username'] +
-                  "\nPassword: " + account_list[account]['password'])
-            with open(path, "r") as f:
-                lines = f.readlines()
-                f.close()
-            with open(path, "w") as f:
-                for line in lines:
-                    if line.strip("\n") != account + ":" + account_list[account]['username'] + ":" + account_list[account]['password']:
-                        f.write(line)
-                f.close()
-            del account_list[account]
-            print("Account deleted")
-            time.sleep(3)
-            os.system('cls')
-            main()
+            print("\nSelected Account: " + account_list[account].ingame_name)
+            print(f"Username: {account_list[account].username}\nPassword: {account_list[account].password}")
+            to_delete = account
         count += 1
 
+    if to_delete:
+        del account_list[to_delete]
+        with open(PATH, "r") as f:
+            lines = f.readlines()
+            f.close()
+        with open(PATH, "w") as f:
+            for line in lines:
+                if line.strip("\n") != f"{to_delete}:{account_list[to_delete].username}:{account_list[to_delete].password}":
+                    f.write(line)
+            f.close()
+        print("Account deleted")
+        time.sleep(3)
+        os.system('cls' if os.name == 'nt' else 'clear')  # Clear screen (Windows or Unix)
+        main()
 
-os.system('cls')
-main()
+if __name__ == "__main__":
+    os.system('cls' if os.name == 'nt' else 'clear')  # Clear screen (Windows or Unix)
+    main()
