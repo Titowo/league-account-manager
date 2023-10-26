@@ -14,7 +14,7 @@ League Account Manager is a simple console-based application that allows you to 
 
 ### Latest Release
 
-- [Download Version 1.0.0](https://github.com/yourusername/league-account-manager/releases/tag/v1.0.0)
+- [Download Version 1.0.0](https://github.com/Titowo/league-account-manager/releases/download/v1.0.0/acc_manager.exe)
 - Initial release of the League Account Manager.
 
 ## Getting Started
